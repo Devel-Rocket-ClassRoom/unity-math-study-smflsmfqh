@@ -20,7 +20,7 @@ public class Assignment_DirectionAlert : MonoBehaviour
         Right
     }
 
-    [System.Serializable]
+    [System.Serializable] // 구조체를 선택적으로 인스펙터에 표시하기 위해
     public struct EnemyInfo
     {
         public Transform transform;
@@ -30,8 +30,9 @@ public class Assignment_DirectionAlert : MonoBehaviour
 
     [Header("=== 감지 설정 ===")]
     [Tooltip("적 감지 반경")]
-    [Range(1f, 30f)]
+    [Range(0.05f, 30f)]
     [SerializeField] private float alertRange = 15f;
+    [SerializeField] private float sideThreshold = 0.3f;
 
     [Header("=== UI 연결 ===")]
     [Tooltip("정보 표시용 TMP_Text (Canvas 하위에 배치)")]
@@ -81,15 +82,14 @@ public class Assignment_DirectionAlert : MonoBehaviour
 
         Vector3 crossProduct= Vector3.Cross(transform.forward, toEnemy.normalized);  
         float dotProduct = Vector3.Dot(transform.forward, toEnemy.normalized);  
+
         float halfscopeCos = Mathf.Cos(scopeAngle * 0.5f * Mathf.Deg2Rad);  
-        float threshold = 0.1f;
+        
 
         if (dotProduct > halfscopeCos) return Direction.Front;
         else if (dotProduct < -halfscopeCos) return Direction.Back;
-
-
-        else if (crossProduct.y > threshold) return Direction.Left;
-        else if (crossProduct.y < -threshold) return Direction.Right;
+        else if (crossProduct.y > sideThreshold) return Direction.Left;
+        else if (crossProduct.y < -sideThreshold) return Direction.Right;
         else return Direction.None;
 
     }

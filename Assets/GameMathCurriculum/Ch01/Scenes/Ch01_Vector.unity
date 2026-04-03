@@ -176,6 +176,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a2fe5a00011e8b4aa515f13df42cd95, type: 3}
+--- !u!4 &268152669 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7071208314807813907, guid: 6a2fe5a00011e8b4aa515f13df42cd95, type: 3}
+  m_PrefabInstance: {fileID: 1384519}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &794700020
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +591,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105796348}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff2172da1632a4f499f18b79f2070338, type: 3}
   m_Name: 
@@ -602,14 +607,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105796348}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84ab1b04a9e56bb4298949a315a120d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assignment_DirectionAlert
   alertRange: 15
+  sideThreshold: 0.3
   uiInfoText: {fileID: 1879432548}
-  nearbyEnemies: []
+  nearbyEnemies:
+  - transform: {fileID: 1436931447}
+    direction: 1
+    distance: 0
+  - transform: {fileID: 1993174775}
+    direction: 2
+    distance: 0
+  - transform: {fileID: 268152669}
+    direction: 3
+    distance: 0
 --- !u!1 &1201190288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,6 +1285,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879432546}
   m_CullTransparentMesh: 1
+--- !u!4 &1993174775 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7071208314807813907, guid: 6a2fe5a00011e8b4aa515f13df42cd95, type: 3}
+  m_PrefabInstance: {fileID: 2019482221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2019482221
 PrefabInstance:
   m_ObjectHideFlags: 0

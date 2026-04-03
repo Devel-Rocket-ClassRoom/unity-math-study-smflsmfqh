@@ -72,7 +72,7 @@ public class Assignment_EnemyDetector : MonoBehaviour
         float dotProduct = Vector3.Dot(transform.forward, toEnemy.normalized);   
         float halfFovCos = Mathf.Cos(detectionFOV * 0.5f * Mathf.Deg2Rad);  
 
-        return dotProduct > halfFovCos;
+        return dotProduct >= halfFovCos;
     }
 
     private void OnDrawGizmos()
