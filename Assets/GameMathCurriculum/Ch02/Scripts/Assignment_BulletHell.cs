@@ -6,6 +6,8 @@
 
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
+using System.Collections;
 
 public class Assignment_BulletHell : MonoBehaviour
 {
@@ -30,6 +32,7 @@ public class Assignment_BulletHell : MonoBehaviour
     [Header("=== 나선형 패턴 파라미터 ===")]
     [Tooltip("나선형 회전 속도 (라디안/초)")] [Range(0.5f, 5f)]
     [SerializeField] private float spiralTurnSpeed = 2f;
+    private float spCurrentRotationOffset;
 
     [Header("=== 부채꼴 패턴 파라미터 ===")]
     [Tooltip("부채꼴 각도 범위 (도, 360까지)")] [Range(30f, 360f)]
@@ -39,6 +42,8 @@ public class Assignment_BulletHell : MonoBehaviour
     [SerializeField] private TextMeshProUGUI debugUI;
     [SerializeField] private float fireTimer = 0f;
 
+    private float currentRotationOffset;
+
     private void Start()
     {
         fireTimer = 0f;
@@ -46,6 +51,9 @@ public class Assignment_BulletHell : MonoBehaviour
 
     private void Update()
     {
+        currentRotationOffset = (Time.time * bulletSpeed) % 360;
+        spCurrentRotationOffset += Time.deltaTime * spiralTurnSpeed;
+
         fireTimer -= Time.deltaTime;
 
         if (fireTimer <= 0f)
@@ -65,13 +73,19 @@ public class Assignment_BulletHell : MonoBehaviour
             return;
         }
 
+        if (patternType == PatternType.Spiral)
+        {
+            StartCoroutine(FireSpiralCoroutine());
+            return;
+        }
+
         for (int i = 0; i < bulletCount; i++)
         {
             Vector3 direction = patternType switch
             {
                 PatternType.Circle => CalculateCircleDirection(i, bulletCount),
                 PatternType.Spiral => CalculateSpiralDirection(i, bulletCount),
-                PatternType.Fan => CalculateFanDirection(i, bulletCount),
+                //PatternType.Fan => CalculateFanDirection(i, bulletCount),
                 _ => Vector3.forward
             };
 
@@ -86,20 +100,67 @@ public class Assignment_BulletHell : MonoBehaviour
 
     private Vector3 CalculateCircleDirection(int index, int total)
     {
-        // TODO
-        return Vector3.forward;
+        float angleSpacing = 360f / total;  
+        float angleDegrees = (index * angleSpacing + currentRotationOffset) % 360f;
+        float angleRadians = angleDegrees * Mathf.Deg2Rad;  
+
+        Vector3 direction = new Vector3(
+            Mathf.Cos(angleRadians),
+            0f,
+            Mathf.Sin(angleRadians)
+        ).normalized;
+
+        return direction;
     }
 
     private Vector3 CalculateSpiralDirection(int index, int total)
     {
-        // TODO
-        return Vector3.forward;
+        spCurrentRotationOffset %= 360f;
+        float angleDegrees = spCurrentRotationOffset;
+        float angleRadians = angleDegrees * Mathf.Deg2Rad;
+
+        Vector3 direction = new Vector3(
+            Mathf.Cos(angleRadians),
+            0,
+            Mathf.Sin(angleRadians)
+        ).normalized;
+
+        return direction;
+    }
+
+    private IEnumerator FireSpiralCoroutine()
+    {
+        for (int i = 0; i < bulletCount; i++)
+        {
+            Vector3 direction = CalculateSpiralDirection(i, bulletCount);
+
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                rb.linearVelocity = direction * bulletSpeed;
+            }
+
+            float angleSpacing = 360f / bulletCount;    
+            spCurrentRotationOffset += angleSpacing;
+            yield return new WaitForSeconds(fireInterval / bulletCount);
+        }
     }
 
     private Vector3 CalculateFanDirection(int index, int total)
     {
-        // TODO
-        return Vector3.forward;
+        float angleSpacing = fanAngle / total;
+        float angleDegrees = (index * angleSpacing + currentRotationOffset) % 360f;
+        float angleRadians = angleDegrees * Mathf.Deg2Rad;
+
+        Vector3 direction = new Vector3(
+            Mathf.Cos(angleRadians),
+            0f,
+            Mathf.Sin(angleRadians)
+        ).normalized;
+
+        return direction;
     }
     
     private void UpdateDebugUI()
