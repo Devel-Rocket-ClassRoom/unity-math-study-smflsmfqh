@@ -84,8 +84,7 @@ public class Assignment_BulletHell : MonoBehaviour
             Vector3 direction = patternType switch
             {
                 PatternType.Circle => CalculateCircleDirection(i, bulletCount),
-                PatternType.Spiral => CalculateSpiralDirection(i, bulletCount),
-                //PatternType.Fan => CalculateFanDirection(i, bulletCount),
+                PatternType.Fan => CalculateFanDirection(i, bulletCount),
                 _ => Vector3.forward
             };
 

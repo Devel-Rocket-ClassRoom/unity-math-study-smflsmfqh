@@ -36,8 +36,9 @@ public class Assignment_LissajousCurve : MonoBehaviour
     [SerializeField] private TextMeshProUGUI debugUI;
     [SerializeField] private Vector3 initialPosition;
     [SerializeField] private Vector3 currentPosition;
-
     private Queue<Vector3> positionTrail;
+    private float currentOffsetX;
+    private float currentOffsetZ;
 
     private void Start()
     {
@@ -62,8 +63,14 @@ public class Assignment_LissajousCurve : MonoBehaviour
     {
         // 리사주 곡선 (Lissajous Curve) 공식:
         //   x(t) = Ax × sin(2π × fx × t + φx)
+        float phaseXRadians = phaseX * Mathf.Deg2Rad;
+        float timeInCycleX = time * frequencyX;
+        currentOffsetX = amplitudeX * Mathf.Sin(2f * Mathf.PI * timeInCycleX + phaseXRadians);
+
         //   z(t) = Az × sin(2π × fz × t + φz)
-        //
+        float phaseZRadians = phaseZ * Mathf.Deg2Rad;
+        float timeInCycleZ = time * frequencyZ;
+        currentOffsetZ = amplitudeZ * Mathf.Sin(2f * Mathf.PI * timeInCycleZ + phaseZRadians);
         // Ax, Az = 진폭 (amplitudeX, amplitudeZ)
         // fx, fz = 주파수 (frequencyX, frequencyZ)
         // φx, φz = 위상 (phaseX, phaseZ) — 도(degree) → 라디안 변환 필요
@@ -71,7 +78,7 @@ public class Assignment_LissajousCurve : MonoBehaviour
         // initialPosition을 기준으로 X, Z 오프셋을 더해 최종 위치를 반환하세요.
 
         // TODO: 위 공식을 구현하세요
-        return initialPosition;
+        return new Vector3(initialPosition.x + currentOffsetX, 0f, initialPosition.z + currentOffsetZ);
     }
 
     private void UpdateDebugUI()
