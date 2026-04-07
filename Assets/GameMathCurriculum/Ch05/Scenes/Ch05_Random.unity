@@ -1468,6 +1468,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GachaManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2655088727889922123, guid: a7ecebbfa3d583341bd4556bc1bf8f15, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3441839997501775134, guid: a7ecebbfa3d583341bd4556bc1bf8f15, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1539,7 +1543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5996318699133563559, guid: a6031942cca7463469e1650489c23560, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5996318699133563559, guid: a6031942cca7463469e1650489c23560, type: 3}
       propertyPath: resultText
@@ -1552,6 +1556,10 @@ PrefabInstance:
     - target: {fileID: 7351640142143313609, guid: a6031942cca7463469e1650489c23560, type: 3}
       propertyPath: m_Name
       value: DropTableManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351640142143313609, guid: a6031942cca7463469e1650489c23560, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

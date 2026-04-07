@@ -91,12 +91,21 @@ public class Assignment_GachaSimulator : MonoBehaviour
 
     private void ExecutePull()
     {
+        if (pullHistory.Count > MAX_HISTORY)
+        {
+            pullHistory.RemoveAt(pullHistory.Count-1);
+        }
+
+        if (ssrPityList.Count > MAX_HISTORY)
+        {
+            ssrPityList.RemoveAt(0);
+        }
+
         float roll = Random.value;
         currentEffectiveRate = baseRate;
 
         if (currentPityCount >= hardPity)
         {
-            currentPityCount = 0;
             currentEffectiveRate = 1f;
             isTaken = true;
         }
@@ -114,6 +123,8 @@ public class Assignment_GachaSimulator : MonoBehaviour
         if (roll < currentEffectiveRate)
         {
             totalSSRs++;
+            ssrPityList.Add(currentPityCount);
+
             currentPityCount = 0;
             isTaken = true;
         }
@@ -121,7 +132,10 @@ public class Assignment_GachaSimulator : MonoBehaviour
         {
             currentPityCount++;
         }
+
         totalPulls++;
+        pullHistory.Insert(0, isTaken);
+        
     }
 
     private void UpdateUI()
