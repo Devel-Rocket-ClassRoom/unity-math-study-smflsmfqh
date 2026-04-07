@@ -50,7 +50,6 @@ public class Assignment_RotationTrail : MonoBehaviour
         if (trailPositions.Count > trailLength)
         {
             trailPositions.RemoveAt(0);
-
         }
  
         rotationAngle = autoRotate ? Time.time * rotationSpeed: rotationAngle;
