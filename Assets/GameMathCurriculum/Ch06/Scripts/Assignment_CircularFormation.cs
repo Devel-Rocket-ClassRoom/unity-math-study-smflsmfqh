@@ -41,23 +41,37 @@ public class Assignment_CircularFormation : MonoBehaviour
         }
 
         currentUnitCount = units.Length;
-        leaderRotationEuler = leader.rotation.eulerAngles;
+        leaderRotationEuler = leader.rotation.eulerAngles; // transform.rotation: Quaternion, transform.eulerAngles: Vector3 (오일러 각도)
 
         for (int i = 0; i < units.Length; i++)
         {
             if (units[i] == null) continue;
 
             // TODO
-            float angleOffset = (360f / units.Length) * i;
-            Quaternion rotQuat = Quaternion.AngleAxis(angleOffset, leader.up);
+            // 1. 유닛들을 주위에 원형으로 균등 배치 & 2. 리더가 이동하면 진형이 함께 이동한다.
+            float angle = (360f / units.Length) * i;
+            Quaternion subRot = Quaternion.AngleAxis(angle, leader.up);
+            Vector3 offset = subRot * leader.forward * formationRadius;
 
-            Vector3 offset = rotQuat * leader.forward * formationRadius;
             units[i].position = leader.position + offset;
 
-            // TODO
-            //Vector3 toLeaderOutDirection = (units[i].transform.position - leader.position).normalized;
+            // 3. 리더가 회전하면 진형 전체가 함께 회전한다. & 4. 각 유닛은 리더 기준 바깥 방향을 바라본다.
+            // units[i]의 위치가 리더로부터 angle만큼 회전된 곳에 위치함
+            // -> 유닛이 바깥을 바라보는 방향 = 리더 기준으로 angle만큼 회전된 방향
+            // => subRot * leader.rotation을 해주면 리더의 바깥 방향을 바라볼 수 있게 됨
+            // --- 방법 1 ---
+            units[i].rotation =  subRot * leader.rotation;
 
-            units[i].rotation = rotQuat * leader.rotation;
+            // --- 방법 2 ---
+            // Vector3 outDir = units[i].position - leader.position;
+            // units[i].rotation = Quaternion.LookRotation(outDir);
+
+            // cf) 유닛이 리더를 바라봐야 되다면?
+            // Vector3 dirToLeader = leader.position - units[i].position;
+            // units[i].rotation = Quaternion.LookRotation(dirToLeader);
+
+            // Quaternion.LookRotation()은 방향 벡터를 자동 정규화 => 정규화해줄 필요 없음
+            // 매개변수로는 방향벡터를 받음
             
         }
 
