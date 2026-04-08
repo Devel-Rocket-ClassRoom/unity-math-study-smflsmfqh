@@ -198,7 +198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &56316395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,7 +1209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4116882681045644041, guid: 9dafc40256a6c674ca01e120f3e2d13e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7664204362283275227, guid: 9dafc40256a6c674ca01e120f3e2d13e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1377,7 +1377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1323855487
 Transform:
   m_ObjectHideFlags: 0
@@ -1739,7 +1739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1609640394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2197,7 +2197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1752775145
 Transform:
   m_ObjectHideFlags: 0
@@ -2641,21 +2641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684e6611fc75f264291a704489e776b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  curveType: 2
-  boxes:
-  - {fileID: 519209945}
-  - {fileID: 1754504157}
-  - {fileID: 1822384999}
-  - {fileID: 1621230704}
-  p0: {x: -3, y: 0, z: 0}
-  p1: {x: -1, y: 3, z: 0}
-  p2: {x: 1, y: 3, z: 0}
-  p3: {x: 3, y: 0, z: 0}
-  speed: 0.5
-  colorCurve: {r: 0, g: 1, b: 1, a: 1}
-  colorControlPoints: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  colorMovingPoint: {r: 0, g: 1, b: 0, a: 1}
-  colorControlLines: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1001 &1894373207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2710,7 +2695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 649308663339417987, guid: 3c748a888c0e7d74dbb54d475cafca6b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2041040197625500462, guid: 3c748a888c0e7d74dbb54d475cafca6b, type: 3}
       propertyPath: uiInfoText
