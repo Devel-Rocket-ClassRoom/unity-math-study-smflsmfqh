@@ -52,17 +52,17 @@ public class Assignment_PatrolGuard : MonoBehaviour
         Vector3 dirToNext = target.position - transform.position;
         dirToNext.y = 0f;
         dirToNext.Normalize();
- 
-
-        Quaternion turnRotation = Quaternion.FromToRotation(transform.forward, dirToNext);
-        targetRotation = turnRotation * transform.rotation;
 
         // TODO
+        Quaternion turnRotation = Quaternion.FromToRotation(transform.forward, dirToNext);
+        targetRotation = turnRotation * transform.rotation;
+        
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             targetRotation,
             turnSpeed * Time.deltaTime  
             );
+
 
         // 이동 (제공됨 — 수정 불필요)
         transform.position += transform.forward * moveSpeed * Time.deltaTime;

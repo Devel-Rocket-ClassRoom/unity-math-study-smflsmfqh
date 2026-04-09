@@ -42,7 +42,7 @@ public class Assignment_SplineConveyor : MonoBehaviour
     private void Update()
     {
         // TODO, 스플라인 6등분 구간 별로 오브젝트가 따라감
-        currentSpeedMultiplier = speedCurve.Evaluate(globalT);
+        currentSpeedMultiplier = speedCurve.Evaluate(globalT); // globalT말고 Time.time을 넣는 방법
         globalT += Time.deltaTime / cycleDuration * currentSpeedMultiplier;
         globalT = Mathf.Repeat(globalT, 1f);
 

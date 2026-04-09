@@ -30,7 +30,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private float minSpeed = 0.5f;
     private float maxSpeed = 2f;
-    private float currentT;
     private const int count = 20;
 
     private void Awake()
@@ -92,8 +91,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private (Vector3, Vector3) SetRandomP1P2()
     {
-        var randomP1 = new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0f);
-        var randomP2 = new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0f);
+        var randomP1 = new Vector3(Random.Range(-10f, 10f), Random.Range(0f, 10f), 0f);
+        var randomP2 = new Vector3(Random.Range(-10f, 10f), Random.Range(0f, 10f), 0f);
 
         return (randomP1, randomP2);
     }
