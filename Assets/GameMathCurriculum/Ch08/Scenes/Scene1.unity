@@ -119,6 +119,59 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &17407988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 17407990}
+  - component: {fileID: 17407989}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &17407989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17407988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca83764e67fc80a488acdde307515acb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OffscreenIndicator
+  targets:
+  - {fileID: 1588703141}
+  - {fileID: 1848944072}
+  - {fileID: 1651354874}
+  indicators:
+  - {fileID: 1866653713}
+  - {fileID: 1193507714}
+  - {fileID: 1860359514}
+  smoothSpeed: 3
+--- !u!4 &17407990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17407988}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 615.9537, y: -0, z: 259.8661}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &223387729
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0feff227ef38b042a009b1d74592cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 5
+  moveSpeed: 3
 --- !u!136 &223387731
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -364,14 +417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9069ad447de7fe47ac092a2eb4ab95f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OffScreenIndicatior
-  detector: {fileID: 1391674973}
-  indicators:
-  - {fileID: 1866653713}
-  - {fileID: 1193507714}
-  - {fileID: 1860359514}
-  invisibleViewPoints: []
-  invisibleScreenPoints: []
-  cam: {fileID: 0}
 --- !u!1 &736221491
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +631,6 @@ GameObject:
   - component: {fileID: 1391674969}
   - component: {fileID: 1391674968}
   - component: {fileID: 1391674972}
-  - component: {fileID: 1391674973}
   - component: {fileID: 1391674971}
   m_Layer: 0
   m_Name: Main Camera
@@ -733,26 +777,6 @@ MonoBehaviour:
   minZoomDistance: 3
   maxZoomDistance: 15
   zoomSpeed: 3
---- !u!114 &1391674973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1391674967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca83764e67fc80a488acdde307515acb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OffscreenIndicator
-  targets:
-  - {fileID: 1588703141}
-  - {fileID: 1848944072}
-  - {fileID: 1651354874}
-  indicators:
-  - {fileID: 1866653713}
-  - {fileID: 1193507714}
-  - {fileID: 1860359514}
 --- !u!1 &1588703137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,3 +1468,4 @@ SceneRoots:
   - {fileID: 1651354874}
   - {fileID: 417849727}
   - {fileID: 2092088823}
+  - {fileID: 17407990}

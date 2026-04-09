@@ -3,15 +3,14 @@ using UnityEngine;
 
 public class DragAndDrop : MonoBehaviour
 {
-    private readonly string selectableTag = "Selectable";
-    private readonly string groundTag = "Ground";
-
     private Camera cam;
     private GameObject selectedObject;
     private bool isDragging;
-    private float yOffset;
+    private bool isClicked;
+    private const float yOffset = 7f;
     private Vector3 mousePos;
-    private Vector3 pos;
+    private Vector3 targetPos;
+    private Vector3 initialPos;
 
     private void Start()
     {
@@ -23,8 +22,6 @@ public class DragAndDrop : MonoBehaviour
             enabled = false;
         }
 
-        yOffset = Terrain.activeTerrain.SampleHeight(transform.position);
-        pos = transform.position;
         isDragging = false;
     }
 
@@ -38,27 +35,37 @@ public class DragAndDrop : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, maskT))
             {
                 selectedObject = hit.collider.gameObject;
+                initialPos = selectedObject.transform.position;
                 Debug.Log($"[Raycast] 선택됨: {selectedObject.name} at {hit.point}");
                 isDragging = true;
-            }
-                
+            }   
         }
-        if (isDragging)
+        if (isDragging && selectedObject != null)
         {
             int maskG = LayerMask.GetMask("Ground");
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, maskG))
             {
-                Debug.Log("땅 충돌됨");
-                mousePos = Input.mousePosition;
-                mousePos.z = 10f;
-                
-                Vector3 newPos = cam.ScreenToWorldPoint(mousePos);
-                //newPos.y += yOffset;
-                selectedObject.transform.position = newPos;
-                
+                targetPos = hit.point;
+                targetPos.y += yOffset;
+                selectedObject.transform.position = targetPos;
             }
         }
+    
+        if (Input.GetMouseButtonUp(0) && isDragging)
+        {
+            int maskD = LayerMask.GetMask("DropPoint");
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, maskD))
+            {
+                targetPos = hit.point;
+                targetPos.y += yOffset;
+                selectedObject.transform.position = targetPos;
+            }
+            else
+            {
+                selectedObject.transform.position = initialPos;
+            }
+            isDragging = false;
+        }
     }
-
 
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OffscreenDetector: MonoBehaviour
+public class OffscreenIndicator: MonoBehaviour
 {
     public Transform[] targets;
     public Image[] indicators;
@@ -9,7 +9,9 @@ public class OffscreenDetector: MonoBehaviour
     private Camera cam;
     private Vector3 targetPos;
     private Vector3 screenPoint;
-
+    [Header("=== UI 이동 속도 ===")]
+    [SerializeField] private float smoothSpeed = 3f;
+  
     private const float margin = 50f;
 
     private void Start()
@@ -36,12 +38,8 @@ public class OffscreenDetector: MonoBehaviour
         for (int i = 0; i < targets.Length; i++)
         {
             if (targets[i] == null) continue;
-
+            
             targetPos = targets[i].transform.position;
-            screenPoint = cam.WorldToScreenPoint(targetPos);
-
-            screenPoint.x = Mathf.Clamp(screenPoint.x, margin, Screen.width - margin);
-            screenPoint.y = Mathf.Clamp(screenPoint.y, margin, Screen.height - margin);
 
             if (!IsVisibleTarget(targetPos))
             {
@@ -49,8 +47,15 @@ public class OffscreenDetector: MonoBehaviour
                 {
                     screenPoint *= -1f;
                 }
-                indicators[i].transform.position = screenPoint;
+                screenPoint.x = Mathf.Clamp(screenPoint.x, margin, Screen.width - margin);
+                screenPoint.y = Mathf.Clamp(screenPoint.y, margin, Screen.height - margin);
 
+                var currentPos = indicators[i].transform.position; 
+                indicators[i].transform.position = Vector3.Lerp(
+                    currentPos,
+                    screenPoint,
+                    Time.deltaTime * smoothSpeed
+                );
                 indicators[i].enabled = true;
             }
             else
@@ -61,8 +66,8 @@ public class OffscreenDetector: MonoBehaviour
     }
     private bool IsVisibleTarget(Vector3 targetPosition)
     {
-        var targetViewport = cam.WorldToViewportPoint(targetPosition);
-        if (targetViewport.x < 0 || targetViewport.x > 1 || targetViewport.y < 0 || targetViewport.y > 1 || targetViewport.z < 0)
+        screenPoint = cam.WorldToScreenPoint(targetPosition);
+        if (screenPoint.x < 0 || screenPoint.x > Screen.width || screenPoint.y < 0 || screenPoint.y > Screen.height || screenPoint.z < 0)
         {
             return false;
         }
